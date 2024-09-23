@@ -10,22 +10,22 @@ using sem2.Models;
 
 namespace sem2.Controllers
 {
-    public class ClientesController : Controller
+    public class FabricanteController : Controller
     {
         private readonly LocacoesContext _context;
 
-        public ClientesController(LocacoesContext context)
+        public FabricanteController(LocacoesContext context)
         {
             _context = context;
         }
 
-        // GET: Clientes
+        // GET: Fabricante
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Clientes.ToListAsync());
+            return View(await _context.Fabricantes.ToListAsync());
         }
 
-        // GET: Clientes/Details/5
+        // GET: Fabricante/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace sem2.Controllers
                 return NotFound();
             }
 
-            var cliente = await _context.Clientes
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (cliente == null)
+            var fabricante = await _context.Fabricantes
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (fabricante == null)
             {
                 return NotFound();
             }
 
-            return View(cliente);
+            return View(fabricante);
         }
 
-        // GET: Clientes/Create
+        // GET: Fabricante/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Clientes/Create
+        // POST: Fabricante/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Nome,Email,Telefone,Cidade")] Cliente cliente)
+        public async Task<IActionResult> Create([Bind("Id,Nome,Pais")] Fabricante fabricante)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(cliente);
+                _context.Add(fabricante);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(cliente);
+            return View(fabricante);
         }
 
-        // GET: Clientes/Edit/5
+        // GET: Fabricante/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace sem2.Controllers
                 return NotFound();
             }
 
-            var cliente = await _context.Clientes.FindAsync(id);
-            if (cliente == null)
+            var fabricante = await _context.Fabricantes.FindAsync(id);
+            if (fabricante == null)
             {
                 return NotFound();
             }
-            return View(cliente);
+            return View(fabricante);
         }
 
-        // POST: Clientes/Edit/5
+        // POST: Fabricante/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Nome,Email,Telefone,Cidade")] Cliente cliente)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Pais")] Fabricante fabricante)
         {
-            if (id != cliente.ID)
+            if (id != fabricante.Id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace sem2.Controllers
             {
                 try
                 {
-                    _context.Update(cliente);
+                    _context.Update(fabricante);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ClienteExists(cliente.ID))
+                    if (!FabricanteExists(fabricante.Id))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace sem2.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(cliente);
+            return View(fabricante);
         }
 
-        // GET: Clientes/Delete/5
+        // GET: Fabricante/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,34 +124,34 @@ namespace sem2.Controllers
                 return NotFound();
             }
 
-            var cliente = await _context.Clientes
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (cliente == null)
+            var fabricante = await _context.Fabricantes
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (fabricante == null)
             {
                 return NotFound();
             }
 
-            return View(cliente);
+            return View(fabricante);
         }
 
-        // POST: Clientes/Delete/5
+        // POST: Fabricante/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var cliente = await _context.Clientes.FindAsync(id);
-            if (cliente != null)
+            var fabricante = await _context.Fabricantes.FindAsync(id);
+            if (fabricante != null)
             {
-                _context.Clientes.Remove(cliente);
+                _context.Fabricantes.Remove(fabricante);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ClienteExists(int id)
+        private bool FabricanteExists(int id)
         {
-            return _context.Clientes.Any(e => e.ID == id);
+            return _context.Fabricantes.Any(e => e.Id == id);
         }
     }
 }

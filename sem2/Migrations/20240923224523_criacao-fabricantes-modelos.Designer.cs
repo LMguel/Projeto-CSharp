@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using sem2.Data;
 
@@ -10,9 +11,11 @@ using sem2.Data;
 namespace sem2.Migrations
 {
     [DbContext(typeof(LocacoesContext))]
-    partial class LocacoesContextModelSnapshot : ModelSnapshot
+    [Migration("20240923224523_criacao-fabricantes-modelos")]
+    partial class criacaofabricantesmodelos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

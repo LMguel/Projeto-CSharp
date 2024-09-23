@@ -9,5 +9,7 @@ namespace sem2.Data
         {
         }
         public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Fabricante> Fabricantes { get; set; }
+        public DbSet<Modelo> Modelos { get; set; }
     }
 }
